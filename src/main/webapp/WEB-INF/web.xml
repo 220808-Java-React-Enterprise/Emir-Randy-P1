@@ -4,7 +4,7 @@
              http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <Listener>
-        <Listener-class>com.revature.flowerShop.utils.ContextLoaderListener</Listener-class>
-    </Listener>
+    <listener>
+        <listener-class>com.revature.emirRandyP1.utils.ContextLoaderListener</listener-class>
+    </listener>
 </web-app>

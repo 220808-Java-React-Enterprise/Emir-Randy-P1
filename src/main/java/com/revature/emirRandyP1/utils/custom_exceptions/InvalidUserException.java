@@ -1,4 +1,4 @@
-package com.revature.flowerShop.utils.custom_exceptions;
+package com.revature.emirRandyP1.utils.custom_exceptions;
 
 public class InvalidUserException extends RuntimeException{
     public InvalidUserException() {

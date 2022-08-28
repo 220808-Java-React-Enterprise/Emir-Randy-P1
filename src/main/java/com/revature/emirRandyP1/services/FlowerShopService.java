@@ -1,7 +1,7 @@
-package com.revature.flowerShop.services;
+package com.revature.emirRandyP1.services;
 
-import com.revature.flowerShop.daos.FlowerShopDAO;
-import com.revature.flowerShop.models.FlowerShop;
+import com.revature.emirRandyP1.daos.FlowerShopDAO;
+import com.revature.emirRandyP1.models.FlowerShop;
 import java.util.List;
 
 public class FlowerShopService {

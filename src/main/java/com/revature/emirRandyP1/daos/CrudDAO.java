@@ -1,8 +1,8 @@
-package com.revature.flowerShop.daos;
+package com.revature.emirRandyP1.daos;
 
 
-import com.revature.flowerShop.models.Order;
-import com.revature.flowerShop.models.User;
+import com.revature.emirRandyP1.models.Order;
+import com.revature.emirRandyP1.models.User;
 
 import java.util.List;
 

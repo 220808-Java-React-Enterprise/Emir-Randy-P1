@@ -1,4 +1,4 @@
-package com.revature.flowerShop.models;
+package com.revature.emirRandyP1.models;
 
 public class FlowerShop {
     private String id;

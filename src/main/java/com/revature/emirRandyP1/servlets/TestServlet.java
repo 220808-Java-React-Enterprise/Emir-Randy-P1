@@ -1,4 +1,4 @@
-package com.revature.flowerShop.servlets;
+package com.revature.emirRandyP1.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

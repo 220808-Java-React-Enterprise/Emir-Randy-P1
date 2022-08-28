@@ -1,8 +1,8 @@
-package com.revature.flowerShop.services;
+package com.revature.emirRandyP1.services;
 
-import com.revature.flowerShop.daos.FlowerDAO;
-import com.revature.flowerShop.models.Flower;
-import com.revature.flowerShop.utils.custom_exceptions.InvalidUserException;
+import com.revature.emirRandyP1.daos.FlowerDAO;
+import com.revature.emirRandyP1.models.Flower;
+import com.revature.emirRandyP1.utils.custom_exceptions.InvalidUserException;
 
 import java.util.List;
 

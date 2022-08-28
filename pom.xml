@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.revature</groupId>
-    <artifactId>flowerShop</artifactId>
+    <artifactId>emirRandyP1</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -65,7 +65,7 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
-                        <path>/flowerShop</path>
+                        <path>/emirRandyP1</path>
                         <update>true</update>
                     </configuration>
                 </plugin>

@@ -1,12 +1,12 @@
-package com.revature.flowerShop.daos;
+package com.revature.emirRandyP1.daos;
 
-import com.revature.flowerShop.models.FlowerShop;
+import com.revature.emirRandyP1.models.FlowerShop;
 
 
-import com.revature.flowerShop.models.Order;
-import com.revature.flowerShop.models.User;
-import com.revature.flowerShop.utils.custom_exceptions.InvalidSQLException;
-import com.revature.flowerShop.utils.database.ConnectionFactory;
+import com.revature.emirRandyP1.models.Order;
+import com.revature.emirRandyP1.models.User;
+import com.revature.emirRandyP1.utils.custom_exceptions.InvalidSQLException;
+import com.revature.emirRandyP1.utils.database.ConnectionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
