@@ -1,7 +1,5 @@
 package com.revature.emirRandyP1.daos;
 
-
-import com.revature.emirRandyP1.models.Order;
 import com.revature.emirRandyP1.models.User;
 
 import java.util.List;
@@ -13,11 +11,12 @@ public interface CrudDAO<T>{
 
     void save(T object);
 
-    void save(Order object);
-
     void update(T object);
+
     void delete(String id);
+
     T getById(String id);
+
     List<T> getAll();
 
 

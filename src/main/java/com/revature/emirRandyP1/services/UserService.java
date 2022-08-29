@@ -1,10 +1,14 @@
 package com.revature.emirRandyP1.services;
 
 import com.revature.emirRandyP1.daos.UserDAO;
+import com.revature.emirRandyP1.dtos.requests.NewUserRequest;
 import com.revature.emirRandyP1.models.User;
+import com.revature.emirRandyP1.utils.custom_exceptions.InvalidRequestException;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidUserException;
+import com.revature.emirRandyP1.utils.custom_exceptions.ResourceConflictException;
 
 import java.util.List;
+import java.util.UUID;
 
 public class UserService {
     private final UserDAO userDAO;
@@ -13,27 +17,39 @@ public class UserService {
         this.userDAO = userDAO;
     }
 
-    public void register(User user) {
-        userDAO.save(user);
+    public User register(NewUserRequest request) {
+        User user = null;
+
+        if(validateUsername(request.getUsername())){
+            if(isDuplicateUsername(request.getUsername())){
+                if(validatePassword(request.getPassword())){
+                    if(confirmPassword(request.getPassword(), request.getPassword2())){
+                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword());
+                    }
+                }
+            }
+        }
+
+        return user;
     }
 
-    public User login(String username, String password){
+    public User login(String username, String password) {
         User user = userDAO.getUserLogging(username, password);
 
-if(user == null) throw new InvalidUserException("\nIncorrect username or password");
+        if (user == null) throw new InvalidUserException("\nIncorrect username or password");
 
         return user;
     }
 
     public boolean validateUsername(String username) {
         if (!username.matches("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"))
-            throw new InvalidUserException("Invalid username! Is 8-20 characters long, no _ or . at the beginning, no __ or _. or ._ or .. inside, no __ or _. or ._ or .. inside.");
+            throw new InvalidRequestException("Invalid username! Is 8-20 characters long, no _ or . at the beginning, no __ or _. or ._ or .. inside, no __ or _. or ._ or .. inside.");
         return true;
     }
 
     public boolean validatePassword(String password) {
         if (!password.matches("^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\\d]){1,})(?=(.*[\\W]){1,})(?!.*\\s).{8,}$"))
-            throw new InvalidUserException("Invalid password! At least one uppercase, one lowercase, one digit, one special character, minimum eight in lenght.");
+            throw new InvalidRequestException("Invalid password! At least one uppercase, one lowercase, one digit, one special character, minimum eight in lenght.");
         return true;
     }
 
@@ -50,20 +66,21 @@ if(user == null) throw new InvalidUserException("\nIncorrect username or passwor
     }
 
     public boolean isDuplicateUsername(String username) {
-if(userDAO.getUserName(username) != null) throw new InvalidUserException("\nSorry, " + username + " already been taken.");
+        if (userDAO.getUserName(username) != null)
+            throw new ResourceConflictException("\nSorry, " + username + " already been taken.");
         return false;
     }
 
-    public boolean confirmPassword(String password, String password2){
-        if(!password.equals(password2)) throw  new InvalidUserException("\nPassword do not match, please try again.");
+    public boolean confirmPassword(String password, String password2) {
+        if (!password.equals(password2)) throw new InvalidRequestException("\nPassword do not match, please try again.");
         return true;
     }
 
-    public List<User> getAllUsersByUserRole(String userRole){
+    public List<User> getAllUsersByUserRole(String userRole) {
         return userDAO.getUserByRole(userRole);
     }
 
-    public void getUserByUserName(String username){
+    public void getUserByUserName(String username) {
         userDAO.getUserName(username);
     }
 }

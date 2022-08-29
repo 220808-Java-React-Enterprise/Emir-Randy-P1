@@ -3,29 +3,31 @@ package com.revature.emirRandyP1.models;
 public class User {
     private String id;
     private String username;
-    private String password;
     private String email;
-    private String phoneNumber;
-    private String userRole = "REGULAR_CUSTOMER";
+    private String password;
+    private String givenName;
+    private String surname;
+    private boolean isActive;
+    private String roleId = "REGULAR_CUSTOMER";
 
     public User() {
     }
 
-    public User(String id, String username, String password, String email, String phoneNumber) {
+    public User(String id, String username, String email, String password, String givenName, String surname, boolean isActive, String roleId) {
         this.id = id;
         this.username = username;
-        this.password = password;
         this.email = email;
-        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.givenName = givenName;
+        this.surname = surname;
+        this.isActive = isActive;
+        this.roleId = roleId;
     }
 
-    public User(String id, String username, String password, String email, String phoneNumber, String userRole) {
+    public User(String id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.userRole = userRole;
     }
 
     public String getId() {
@@ -44,14 +46,6 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -60,35 +54,57 @@ public class User {
         this.email = email;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public String getGivenName() {
+        return givenName;
     }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
     }
 
-    public String toFileString(){
-        return id + ":" + username + ":" + password + ":" + email + ":" + phoneNumber + ":" + userRole + "\n";
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Users{" +
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", customerType='" + userRole + '\'' +
+                ", password='" + password + '\'' +
+                ", givenName='" + givenName + '\'' +
+                ", surname='" + surname + '\'' +
+                ", isActive=" + isActive +
+                ", roleId='" + roleId + '\'' +
                 '}';
     }
 }
