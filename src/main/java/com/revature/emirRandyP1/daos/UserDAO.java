@@ -11,12 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements CrudDAO<User>{
+public class UserDAO implements CrudDAO<User> {
 
     @Override
     public void save(User object) {
         try (Connection con = ConnectionFactory.getInstance().getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO ers_users(user_id, username, email, password, given_name, surname, is_active, role_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO ers_users(user_id, username, email, password, given_name, surname, is_active, role_id) VALUES (?,?,?,?,?,?,?,?)");
             ps.setString(1, object.getId());
             ps.setString(2, object.getUsername());
             ps.setString(3, object.getEmail());
@@ -73,7 +73,7 @@ public class UserDAO implements CrudDAO<User>{
             ps.setString(1, userRole);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 User user = new User(rs.getString("user_id"), rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getString("given_name"), rs.getString("surname"), rs.getBoolean("is_active"), rs.getString("role_id"));
                 users.add(user);
             }

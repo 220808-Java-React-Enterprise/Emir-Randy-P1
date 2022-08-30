@@ -21,10 +21,14 @@ public class UserService {
         User user = null;
 
         if (validateUsername(request.getUsername())) {
-            if (isDuplicateUsername(request.getUsername())) {
+            System.out.println("1");
+            if (!isDuplicateUsername(request.getUsername())) {
+                System.out.println("2");
                 if (validatePassword(request.getPassword1())) {
+                    System.out.println("3");
                     if (confirmPassword(request.getPassword1(), request.getPassword2())) {
-                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword1());
+                        System.out.println("4");
+                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword1(), request.getEmail(), request.getGivenName(), request.getSurname(), false, null);
                         userDAO.save(user);
                     }
                 }

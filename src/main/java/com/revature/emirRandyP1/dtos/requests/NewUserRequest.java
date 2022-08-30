@@ -7,13 +7,22 @@ public class NewUserRequest {
     private String password1;
     private String password2;
 
+    private String email;
+
+    private String givenName;
+
+    private String surname;
+
     public NewUserRequest() {
     }
 
-    public NewUserRequest(String username, String password, String password2) {
+    public NewUserRequest(String username, String password, String password2, String email, String givenName, String surname) {
         this.username = username;
         this.password1 = password;
         this.password2 = password2;
+        this.email = email;
+        this.givenName = givenName;
+        this.surname = surname;
     }
 
     public String getUsername() {
@@ -40,12 +49,39 @@ public class NewUserRequest {
         this.password2 = password2;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getGivenName() {
+        return givenName;
+    }
+
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
     @Override
     public String toString() {
         return "NewUserRequest{" +
                 "username='" + username + '\'' +
-                ", password='" + password1 + '\'' +
+                ", password1='" + password1 + '\'' +
                 ", password2='" + password2 + '\'' +
+                ", email='" + email + '\'' +
+                ", givenName='" + givenName + '\'' +
+                ", surname='" + surname + '\'' +
                 '}';
     }
 }

@@ -13,17 +13,6 @@ public class User {
     public User() {
     }
 
-    public User(String id, String username, String email, String password, String givenName, String surname, boolean isActive, String roleId) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.password = password;
-        this.givenName = givenName;
-        this.surname = surname;
-        this.isActive = isActive;
-        this.roleId = roleId;
-    }
-
     public User(String id, String username, String password) {
         this.id = id;
         this.username = username;
@@ -37,6 +26,17 @@ public class User {
         this.email = email;
         this.givenName = givenName;
         this.surname = surname;
+    }
+
+    public User(String id, String username, String email, String password, String givenName, String surname, boolean isActive, String roleId) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.givenName = givenName;
+        this.surname = surname;
+        this.isActive = isActive;
+        this.roleId = roleId;
     }
 
     public String getId() {
