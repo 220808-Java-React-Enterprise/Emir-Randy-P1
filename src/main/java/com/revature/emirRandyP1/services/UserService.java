@@ -20,11 +20,12 @@ public class UserService {
     public User register(NewUserRequest request) {
         User user = null;
 
-        if(validateUsername(request.getUsername())){
-            if(isDuplicateUsername(request.getUsername())){
-                if(validatePassword(request.getPassword())){
-                    if(confirmPassword(request.getPassword(), request.getPassword2())){
-                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword());
+        if (validateUsername(request.getUsername())) {
+            if (isDuplicateUsername(request.getUsername())) {
+                if (validatePassword(request.getPassword1())) {
+                    if (confirmPassword(request.getPassword1(), request.getPassword2())) {
+                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword1());
+                        userDAO.save(user);
                     }
                 }
             }
@@ -72,7 +73,8 @@ public class UserService {
     }
 
     public boolean confirmPassword(String password, String password2) {
-        if (!password.equals(password2)) throw new InvalidRequestException("\nPassword do not match, please try again.");
+        if (!password.equals(password2))
+            throw new InvalidRequestException("\nPassword do not match, please try again.");
         return true;
     }
 

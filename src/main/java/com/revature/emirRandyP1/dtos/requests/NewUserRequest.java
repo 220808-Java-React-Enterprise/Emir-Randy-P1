@@ -1,8 +1,10 @@
 package com.revature.emirRandyP1.dtos.requests;
 
 public class NewUserRequest {
+
     private String username;
-    private String password;
+
+    private String password1;
     private String password2;
 
     public NewUserRequest() {
@@ -10,7 +12,7 @@ public class NewUserRequest {
 
     public NewUserRequest(String username, String password, String password2) {
         this.username = username;
-        this.password = password;
+        this.password1 = password;
         this.password2 = password2;
     }
 
@@ -22,12 +24,12 @@ public class NewUserRequest {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPassword1() {
+        return password1;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword1(String password1) {
+        this.password1 = password1;
     }
 
     public String getPassword2() {
@@ -42,7 +44,7 @@ public class NewUserRequest {
     public String toString() {
         return "NewUserRequest{" +
                 "username='" + username + '\'' +
-                ", password='" + password + '\'' +
+                ", password='" + password1 + '\'' +
                 ", password2='" + password2 + '\'' +
                 '}';
     }

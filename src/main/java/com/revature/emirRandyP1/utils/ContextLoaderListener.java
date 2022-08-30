@@ -18,11 +18,11 @@ public class ContextLoaderListener implements ServletContextListener {
 
         /* dependency Injection/*/
         TestServlet testServlet = new TestServlet();
-       UserServlet userServlet = new UserServlet(mapper, new UserService(new UserDAO()));
+        UserServlet userServlet = new UserServlet(mapper, new UserService(new UserDAO()));
 
         /* Need ServletContext class to map whatever servlet to url path */
         ServletContext context = sce.getServletContext();
-        context.addServlet("TextServlet", testServlet).addMapping("/emirRandyP1");
+        context.addServlet("TextServlet", testServlet).addMapping("/test-app");
         context.addServlet("UserServlet", userServlet).addMapping("/users/*");
     }
 

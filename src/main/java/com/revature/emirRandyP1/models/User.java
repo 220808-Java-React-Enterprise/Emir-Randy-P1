@@ -8,7 +8,7 @@ public class User {
     private String givenName;
     private String surname;
     private boolean isActive;
-    private String roleId = "REGULAR_CUSTOMER";
+    private String roleId = "DEFAULT";
 
     public User() {
     }
@@ -28,6 +28,15 @@ public class User {
         this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public User(String id, String username, String password, String email, String givenName, String surname) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.givenName = givenName;
+        this.surname = surname;
     }
 
     public String getId() {
