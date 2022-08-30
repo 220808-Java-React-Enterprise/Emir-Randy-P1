@@ -1,8 +1,11 @@
 package com.revature.emirRandyP1.services;
 
 import com.revature.emirRandyP1.daos.UserDAO;
+import com.revature.emirRandyP1.dtos.requests.LoginRequest;
 import com.revature.emirRandyP1.dtos.requests.NewUserRequest;
+import com.revature.emirRandyP1.dtos.responses.Principal;
 import com.revature.emirRandyP1.models.User;
+import com.revature.emirRandyP1.utils.custom_exceptions.InvalidAuthenticationException;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidRequestException;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidUserException;
 import com.revature.emirRandyP1.utils.custom_exceptions.ResourceConflictException;
@@ -38,12 +41,10 @@ public class UserService {
         return user;
     }
 
-    public User login(String username, String password) {
-        User user = userDAO.getUserLogging(username, password);
-
-        if (user == null) throw new InvalidUserException("\nIncorrect username or password");
-
-        return user;
+    public Principal login(LoginRequest request) {
+        User user = userDAO.getUserLogging(request.getUsername(), request.getPassword());
+        if (user == null) throw new InvalidAuthenticationException("\nIncorrect username or password");
+        return new Principal(user.getId(), user.getUsername(), user.getRoleId());
     }
 
     public boolean validateUsername(String username) {

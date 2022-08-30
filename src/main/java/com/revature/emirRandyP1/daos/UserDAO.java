@@ -3,7 +3,6 @@ package com.revature.emirRandyP1.daos;
 import com.revature.emirRandyP1.models.User;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidSQLException;
 import com.revature.emirRandyP1.utils.database.ConnectionFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +50,6 @@ public class UserDAO implements CrudDAO<User> {
         return null;
     }
 
-    //Check if exist username into database
     public String getUserName(String username) {
         try (Connection con = ConnectionFactory.getInstance().getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT (username) FROM ers_users WHERE username = ?");
