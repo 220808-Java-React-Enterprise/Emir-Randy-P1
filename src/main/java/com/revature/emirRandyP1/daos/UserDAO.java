@@ -36,9 +36,37 @@ public class UserDAO implements CrudDAO<User> {
 
     }
 
+    public void updatePassword(User object){
+        try (Connection con = ConnectionFactory.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE ers_users SET password = ? WHERE user_id = ?");
+            ps.setString(1, object.getPassword());
+            ps.setString(2, object.getId());
+            ps.executeUpdate();
+        }catch(SQLException e){
+            throw new InvalidSQLException("Error occurred connecting to database");
+        }
+    }
+
+    public void updateUserActive(User object){
+        try (Connection con = ConnectionFactory.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE ers_users SET is_active = ? WHERE user_id = ?");
+            ps.setBoolean(1, object.isActive());
+            ps.setString(2, object.getId());
+            ps.executeUpdate();
+        }catch(SQLException e){
+            throw new InvalidSQLException("Error occurred connecting to database");
+        }
+    }
+
     @Override
     public void delete(String id) {
-
+        try (Connection con = ConnectionFactory.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM ers_users WHERE user_id = ?");
+            ps.setString(1, id);
+            ps.executeUpdate();
+        }catch(SQLException e){
+            throw new InvalidSQLException("Error occurred connecting to database");
+        }
     }
 
     @Override
@@ -128,4 +156,19 @@ public class UserDAO implements CrudDAO<User> {
         }
         return null;
     }
+
+    public User getUserById(String user_id){
+        try (Connection con = ConnectionFactory.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM ers_users WHERE user_id = ?");
+            ps.setString(1, user_id);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next())
+                return new User(rs.getString("user_id"), rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getString("given_name"), rs.getString("surname"), rs.getBoolean("is_active"), rs.getString("role_id"));
+        } catch (SQLException e) {
+            throw new InvalidSQLException("An error occurred when trying to save to the database");
+        }
+        return null;
+    }
+
 }
