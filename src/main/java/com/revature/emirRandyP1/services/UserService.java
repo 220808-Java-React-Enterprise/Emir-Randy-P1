@@ -1,8 +1,10 @@
 package com.revature.emirRandyP1.services;
 
 import com.revature.emirRandyP1.daos.UserDAO;
+import com.revature.emirRandyP1.dtos.requests.ActiveUserRequest;
 import com.revature.emirRandyP1.dtos.requests.LoginRequest;
 import com.revature.emirRandyP1.dtos.requests.NewUserRequest;
+import com.revature.emirRandyP1.dtos.responses.ActiveUserResponse;
 import com.revature.emirRandyP1.dtos.responses.Principal;
 import com.revature.emirRandyP1.models.User;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidAuthenticationException;
@@ -24,14 +26,14 @@ public class UserService {
         User user = null;
 
         if (validateUsername(request.getUsername())) {
-            System.out.println("1");
+            //System.out.println("1");
             if (!isDuplicateUsername(request.getUsername())) {
-                System.out.println("2");
+                //System.out.println("2");
                 if (validatePassword(request.getPassword1())) {
-                    System.out.println("3");
+                    //System.out.println("3");
                     if (confirmPassword(request.getPassword1(), request.getPassword2())) {
-                        System.out.println("4");
-                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword1(), request.getEmail(), request.getGivenName(), request.getSurname(), false, null);
+                        //System.out.println("4");
+                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword1(), request.getEmail(), request.getGivenName(), request.getSurname(), true, null);
                         userDAO.save(user);
                     }
                 }
@@ -45,6 +47,12 @@ public class UserService {
         User user = userDAO.getUserLogging(request.getUsername(), request.getPassword());
         if (user == null) throw new InvalidAuthenticationException("\nIncorrect username or password");
         return new Principal(user.getId(), user.getUsername(), user.getRoleId());
+    }
+
+    public ActiveUserResponse userIsActive(ActiveUserRequest request){
+        User user = userDAO.getUserById(request.getUserId());
+        if (user == null) throw new InvalidAuthenticationException("\nIncorrect User ID");
+        return new ActiveUserResponse(user.getId(), user.isActive());
     }
 
     public List<User> getAllUsers(){

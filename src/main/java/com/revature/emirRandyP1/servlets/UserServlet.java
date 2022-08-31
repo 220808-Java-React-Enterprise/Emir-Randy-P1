@@ -18,7 +18,6 @@ import java.util.List;
 
 public class UserServlet extends HttpServlet {
     private final ObjectMapper mapper;
-
     private final TokenService tokenService;
     private final UserService userService;
 
@@ -46,6 +45,7 @@ public class UserServlet extends HttpServlet {
             }else{
                 System.out.println("NO");
             }
+
         } catch (InvalidRequestException e) {
             resp.setStatus(404); //BAD REQUEST
         } catch (ResourceConflictException e) {

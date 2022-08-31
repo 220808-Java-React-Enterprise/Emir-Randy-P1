@@ -1,5 +1,6 @@
 package com.revature.emirRandyP1.services;
 
+import com.revature.emirRandyP1.dtos.responses.ActiveUserResponse;
 import com.revature.emirRandyP1.utils.JwtConfig;
 import com.revature.emirRandyP1.dtos.responses.Principal;
 import com.revature.emirRandyP1.utils.JwtConfig;
@@ -29,6 +30,20 @@ public class TokenService {
                 .setExpiration(new Date(now + jwtConfig.getExpiration()))
                 .setSubject(subject.getUsername())
                 .claim("role", subject.getRole())
+                .signWith(jwtConfig.getSigAlg(), jwtConfig.getSigningKey());
+
+        return tokenBuilder.compact();
+    }
+
+    public String generateToken(ActiveUserResponse subject){
+        long now = System.currentTimeMillis();
+        JwtBuilder tokenBuilder = Jwts.builder()
+                .setId(subject.getUserId())
+                .setIssuer("emirRandyP1")
+                .setIssuedAt(new Date(now))
+                .setExpiration(new Date(now + jwtConfig.getExpiration()))
+                .setSubject(subject.getUserId())
+                .claim("Activity", subject.isActive())
                 .signWith(jwtConfig.getSigAlg(), jwtConfig.getSigningKey());
 
         return tokenBuilder.compact();
