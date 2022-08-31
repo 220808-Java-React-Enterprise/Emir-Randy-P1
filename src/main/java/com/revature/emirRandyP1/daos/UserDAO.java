@@ -3,6 +3,7 @@ package com.revature.emirRandyP1.daos;
 import com.revature.emirRandyP1.models.User;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidSQLException;
 import com.revature.emirRandyP1.utils.database.ConnectionFactory;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,6 +48,33 @@ public class UserDAO implements CrudDAO<User> {
 
     @Override
     public List<User> getAll() {
+        List<User> userList = new ArrayList<>();
+
+        try (Connection con = ConnectionFactory.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM ers_users");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()){
+                User user = new User(rs.getString("user_id"), rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getString("given_name"), rs.getString("surname"), rs.getBoolean("is_active"), rs.getString("role_id"));
+                userList.add(user);
+            }
+        } catch (SQLException e) {
+            throw new InvalidSQLException("An error ocurred when trying to save to the database");
+        }
+        return userList;
+    }
+
+    public User getUserByUsername(String username){
+        try (Connection con = ConnectionFactory.getInstance().getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM ers_users WHERE username = ?");
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new User(rs.getString("user_id"), rs.getString("username"), rs.getString("email"), rs.getString("password"), rs.getString("given_name"), rs.getString("surname"), rs.getBoolean("is_active"), rs.getString("role_id"));
+            }
+        } catch (SQLException e) {
+            throw new InvalidSQLException("An error occurred when trying to save to the database");
+        }
         return null;
     }
 

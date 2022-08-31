@@ -18,7 +18,7 @@ public class ContextLoaderListener implements ServletContextListener {
         ObjectMapper mapper = new ObjectMapper();
 
         /* dependency Injection/*/
-        UserServlet userServlet = new UserServlet(mapper, new UserService(new UserDAO()));
+        UserServlet userServlet = new UserServlet(mapper, new TokenService(new JwtConfig()), new UserService(new UserDAO()));
         AuthServlet authServlet = new AuthServlet(mapper, new TokenService(new JwtConfig()), new UserService(new UserDAO()));
 
 

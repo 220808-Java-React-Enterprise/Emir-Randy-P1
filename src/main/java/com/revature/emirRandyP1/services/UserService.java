@@ -47,6 +47,15 @@ public class UserService {
         return new Principal(user.getId(), user.getUsername(), user.getRoleId());
     }
 
+    public List<User> getAllUsers(){
+      return userDAO.getAll();
+    }
+
+    public User getUserByUsername(String username){
+        if(userDAO.getUserByUsername(username) == null) throw new InvalidRequestException("\nInvalid Request! There is no user by that username");
+       return userDAO.getUserByUsername(username);
+    }
+
     public boolean validateUsername(String username) {
         if (!username.matches("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$"))
             throw new InvalidRequestException("Invalid username! Is 8-20 characters long, no _ or . at the beginning, no __ or _. or ._ or .. inside, no __ or _. or ._ or .. inside.");
