@@ -53,6 +53,12 @@
             <version>4.7.0</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -65,7 +71,7 @@
                     <configuration>
                         <url>http://localhost:8080/manager/text</url>
                         <server>LocalTomcat</server>
-                        <path>/Emir-Randy-P1</path>
+                        <path>/emirRandyP1</path>
                         <update>true</update>
                     </configuration>
                 </plugin>
