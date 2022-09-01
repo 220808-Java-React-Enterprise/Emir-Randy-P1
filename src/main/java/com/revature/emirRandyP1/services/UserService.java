@@ -59,7 +59,7 @@ public class UserService {
     }
 
     public void deleteUserByUsername(DeleteUserRequest request){
-        userDAO.delete(request.getUsername());
+       userDAO.delete(request.getUsername());
     }
 
     public List<User> getAllUsers(){

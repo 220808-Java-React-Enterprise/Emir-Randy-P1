@@ -40,6 +40,9 @@ public class UserDeleteServlet extends HttpServlet {
                }else{
                    userService.deleteUserByUsername(request);
 
+                   resp.setStatus(200);
+                   resp.setHeader("Authorization", token);
+                   resp.setContentType("application/json");
                }
            }else {
                resp.setStatus(403); // FORBIDDEN

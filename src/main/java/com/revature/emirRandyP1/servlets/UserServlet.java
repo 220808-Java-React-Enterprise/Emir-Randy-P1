@@ -38,7 +38,7 @@ public class UserServlet extends HttpServlet {
 
             if(path[3].equals("signup")){
                 User createdUser = userService.register(request);
-                System.out.println(createdUser);
+                //System.out.println(createdUser);
                 resp.setContentType("application/json");
                 resp.setStatus(200); //CREATED
                 resp.getWriter().write(mapper.writeValueAsString(createdUser.getId()));
