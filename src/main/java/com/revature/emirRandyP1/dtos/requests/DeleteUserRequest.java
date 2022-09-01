@@ -2,27 +2,27 @@ package com.revature.emirRandyP1.dtos.requests;
 
 public class DeleteUserRequest {
 
-    private String userId;
+    private String username;
 
     public DeleteUserRequest() {
     }
 
     public DeleteUserRequest(String userId) {
-        this.userId = userId;
+        this.username = userId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     @Override
     public String toString() {
         return "DeleteUserRequest{" +
-                "userId='" + userId + '\'' +
+                "userId='" + username + '\'' +
                 '}';
     }
 }

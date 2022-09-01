@@ -8,7 +8,7 @@ public class User {
     private String givenName;
     private String surname;
     private boolean isActive;
-    private String roleId = "DEFAULT";
+    private String roleId;
 
     public User() {
     }
