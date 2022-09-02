@@ -59,10 +59,10 @@ public class UserDAO implements CrudDAO<User> {
     }
 
     @Override
-    public void delete(String id) {
+    public void delete(String username) {
         try (Connection con = ConnectionFactory.getInstance().getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM ers_users WHERE user_id = ?");
-            ps.setString(1, id);
+            PreparedStatement ps = con.prepareStatement("DELETE FROM ers_users WHERE username = ?");
+            ps.setString(1, username);
             ps.executeUpdate();
         }catch(SQLException e){
             throw new InvalidSQLException("Error occurred connecting to database");

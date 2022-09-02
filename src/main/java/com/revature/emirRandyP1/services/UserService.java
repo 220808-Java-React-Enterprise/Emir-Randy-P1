@@ -2,9 +2,11 @@ package com.revature.emirRandyP1.services;
 
 import com.revature.emirRandyP1.daos.UserDAO;
 import com.revature.emirRandyP1.dtos.requests.ActiveUserRequest;
+import com.revature.emirRandyP1.dtos.requests.DeleteUserRequest;
 import com.revature.emirRandyP1.dtos.requests.LoginRequest;
 import com.revature.emirRandyP1.dtos.requests.NewUserRequest;
 import com.revature.emirRandyP1.dtos.responses.ActiveUserResponse;
+import com.revature.emirRandyP1.dtos.responses.DeleteUserResponse;
 import com.revature.emirRandyP1.dtos.responses.Principal;
 import com.revature.emirRandyP1.models.User;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidAuthenticationException;
@@ -33,7 +35,7 @@ public class UserService {
                     //System.out.println("3");
                     if (confirmPassword(request.getPassword1(), request.getPassword2())) {
                         //System.out.println("4");
-                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getPassword1(), request.getEmail(), request.getGivenName(), request.getSurname(), true, null);
+                        user = new User(UUID.randomUUID().toString(), request.getUsername(), request.getEmail(), request.getPassword1(), request.getGivenName(), request.getSurname(), true, "3");
                         userDAO.save(user);
                     }
                 }
@@ -52,7 +54,12 @@ public class UserService {
     public ActiveUserResponse userIsActive(ActiveUserRequest request){
         User user = userDAO.getUserById(request.getUserId());
         if (user == null) throw new InvalidAuthenticationException("\nIncorrect User ID");
+        userDAO.updateUserActive(user);
         return new ActiveUserResponse(user.getId(), user.isActive());
+    }
+
+    public void deleteUserByUsername(DeleteUserRequest request){
+       userDAO.delete(request.getUsername());
     }
 
     public List<User> getAllUsers(){

@@ -1,13 +1,13 @@
-package com.revature.emirRandyP1.dtos.requests;
+package com.revature.emirRandyP1.dtos.responses;
 
-public class DeleteUserRequest {
+public class DeleteUserResponse {
 
     private String username;
 
-    public DeleteUserRequest() {
+    public DeleteUserResponse() {
     }
 
-    public DeleteUserRequest(String userId) {
+    public DeleteUserResponse(String userId) {
         this.username = userId;
     }
 
@@ -21,7 +21,7 @@ public class DeleteUserRequest {
 
     @Override
     public String toString() {
-        return "DeleteUserRequest{" +
+        return "DeleteUserResponse{" +
                 "userId='" + username + '\'' +
                 '}';
     }
