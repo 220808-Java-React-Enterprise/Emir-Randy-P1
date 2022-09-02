@@ -2,8 +2,11 @@ package com.revature.emirRandyP1.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.emirRandyP1.dtos.requests.ActiveUserRequest;
+import com.revature.emirRandyP1.dtos.requests.DeleteUserRequest;
 import com.revature.emirRandyP1.dtos.requests.NewUserRequest;
 import com.revature.emirRandyP1.dtos.responses.ActiveUserResponse;
+import com.revature.emirRandyP1.dtos.responses.Principal;
+import com.revature.emirRandyP1.models.User;
 import com.revature.emirRandyP1.services.TokenService;
 import com.revature.emirRandyP1.services.UserService;
 import com.revature.emirRandyP1.utils.custom_exceptions.InvalidAuthenticationException;
@@ -28,20 +31,30 @@ public class UserActiveServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+        String token = req.getHeader("Authorization");
+        Principal principal = tokenService.extractRequesterDetails(token);
+        ActiveUserRequest request = mapper.readValue(req.getInputStream(), ActiveUserRequest.class);
+
         try{
-            ActiveUserRequest request = mapper.readValue(req.getInputStream(), ActiveUserRequest.class);
-            ActiveUserResponse activeUserResponse = userService.userIsActive(request);
+            if(principal.getRole().equals("1")){ //ADMIN
+                String username = req.getParameter("username");
+                resp.setContentType("application/json");
+                if(username != null){
+                    resp.getWriter().write(mapper.writeValueAsString(userService.getUserByUsername(username)));
+                }else{
+                    userService.userIsActive(request);
 
-            String token = tokenService.generateToken(activeUserResponse);
+                    resp.setStatus(200);
+                    resp.setHeader("Authorization", token);
+                    resp.setContentType("application/json");
+                    resp.getWriter().write(mapper.writeValueAsString(request));
+                }
+            }else {
+                resp.setStatus(403); // FORBIDDEN
+            }
 
-            resp.setStatus(200);
-            resp.setHeader("Authorization", token);
-            resp.setContentType("application/json");
-            resp.getWriter().write(mapper.writeValueAsString(activeUserResponse));
-        } catch (InvalidRequestException e) {
-            resp.setStatus(404); // BAD REQUEST
-        } catch (InvalidAuthenticationException e) {
-            resp.setStatus(401); // INVALID CRED
+        }catch (InvalidRequestException e){
+            resp.setStatus(404); //BAD REQUEST
         }
     }
 

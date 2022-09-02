@@ -51,24 +51,24 @@ public class UserService {
         return new Principal(user.getId(), user.getUsername(), user.getRoleId());
     }
 
-    public ActiveUserResponse userIsActive(ActiveUserRequest request){
+    public void userIsActive(ActiveUserRequest request) {
         User user = userDAO.getUserById(request.getUserId());
         if (user == null) throw new InvalidAuthenticationException("\nIncorrect User ID");
         userDAO.updateUserActive(user);
-        return new ActiveUserResponse(user.getId(), user.isActive());
     }
 
-    public void deleteUserByUsername(DeleteUserRequest request){
-       userDAO.delete(request.getUsername());
+    public void deleteUserByUsername(DeleteUserRequest request) {
+        userDAO.delete(request.getUsername());
     }
 
-    public List<User> getAllUsers(){
-      return userDAO.getAll();
+    public List<User> getAllUsers() {
+        return userDAO.getAll();
     }
 
-    public User getUserByUsername(String username){
-        if(userDAO.getUserByUsername(username) == null) throw new InvalidRequestException("\nInvalid Request! There is no user by that username");
-       return userDAO.getUserByUsername(username);
+    public User getUserByUsername(String username) {
+        if (userDAO.getUserByUsername(username) == null)
+            throw new InvalidRequestException("\nInvalid Request! There is no user by that username");
+        return userDAO.getUserByUsername(username);
     }
 
     public boolean validateUsername(String username) {
